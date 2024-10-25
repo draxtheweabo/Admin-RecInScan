@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% block title %} Dashboard {% endblock %}
+{% block body_class %} sidebar-mini {% endblock body_class %}
+{% block stylesheets %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+<link rel="stylesheet" href="/static/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="content-wrapper" style="background-color: #FFF8CD;">
+  <!--Start Page Header-->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">RecInScan Dashboard</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--End Page Header-->
+
+  <!--Start Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        
+        <!-- Top Left Card: Dishes Recommended by Time (Bar Chart) -->
+        <section class="col-lg-6 connectedSortable">
+          <div class="card" style="background-color: #FF9642;">
+            <div class="card-header">
+              <h3 class="card-title">Dishes Recommended by Time</h3>
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                <canvas id="dishesRecommendedChart" style="position: relative; height: 300px;"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Top Right Card: Most Scanned Ingredients (Pie Chart) -->
+        <section class="col-lg-6 connectedSortable">
+          <div class="card" style="background-color: #FF9642;">
+            <div class="card-header">
+              <h3 class="card-title">Most Scanned Ingredients</h3>
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                <canvas id="scannedIngredientsChart" style="position: relative; height: 300px;"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="row">
+
+        <!-- Bottom Left Card: Users Using Scanner Over the Week (Line Chart) -->
+        <section class="col-lg-6 connectedSortable">
+          <div class="card" style="background-color: #FF9642;">
+            <div class="card-header">
+              <h3 class="card-title">Users Using Scanner Over the Week</h3>
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                <canvas id="scannerUsageChart" style="position: relative; height: 300px;"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bottom Right Card: Empty Card -->
+        <section class="col-lg-6 connectedSortable">
+          <div class="card" style="background-color: #FF9642;">
+            <div class="card-header">
+              <h3 class="card-title">Future Data</h3>
+            </div>
+            <div class="card-body">
+              <p>No data available yet.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </section>
+  <!--End Main content -->
+</div>
+
+{% endblock content %}
+
+{% block javascripts %}
+<!-- jQuery -->
+<script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+<!-- ChartJS -->
+<script src="/static/assets/plugins/chart.js/Chart.min.js"></script>
+
+<!-- Chart Data and Initialization -->
+<script>
+  $(function () {
+    // Bar chart for Dishes Recommended by Time
+    var dishesCtx = document.getElementById('dishesRecommendedChart').getContext('2d');
+    var dishesChart = new Chart(dishesCtx, {
+      type: 'bar',
+      data: {
+        labels: ['8 AM', '10 AM', '12 PM', '2 PM', '4 PM', '6 PM', '8 PM'],
+        datasets: [{
+          label: 'Recommendations',
+          data: [5, 10, 8, 15, 12, 6, 9],
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Number of Recommendations'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Time of Day'
+            }
+          }
+        }
+      }
+    });
+
+    // Pie chart for Most Scanned Ingredients
+    var ingredientsCtx = document.getElementById('scannedIngredientsChart').getContext('2d');
+    var ingredientsChart = new Chart(ingredientsCtx, {
+      type: 'pie',
+      data: {
+        labels: ['Garlic', 'Onion', 'Tomato', 'Pepper', 'Salt'],
+        datasets: [{
+          data: [12, 9, 7, 15, 10],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+
+    // Line chart for Users Using Scanner Over the Week
+    var usageCtx = document.getElementById('scannerUsageChart').getContext('2d');
+    var usageChart = new Chart(usageCtx, {
+      type: 'line',
+      data: {
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        datasets: [{
+          label: 'Users',
+          data: [15, 20, 18, 25, 22, 30, 28],
+          backgroundColor: 'rgba(153, 102, 255, 0.2)',
+          borderColor: 'rgba(153, 102, 255, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Number of Users'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Day of the Week'
+            }
+          }
+        }
+      }
+    });
+  });
+</script>
+{% endblock javascripts %}

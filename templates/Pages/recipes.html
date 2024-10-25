@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+{% block title %} Dashboard {% endblock %}
+<!-- Element injected in the BODY element -->
+{% block body_class %} sidebar-mini {% endblock body_class %}
+<!-- Specific Page CSS goes HERE -->
+{% block stylesheets %}
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Tempusdominus Bootstrap 4 -->
+<link rel="stylesheet" href="/static/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<!-- iCheck -->
+<link rel="stylesheet" href="/static/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- JQVMap -->
+<link rel="stylesheet" href="/static/assets/plugins/jqvmap/jqvmap.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="/static/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+<!-- Daterange picker -->
+<link rel="stylesheet" href="/static/assets/plugins/daterangepicker/daterangepicker.css">
+<!-- summernote -->
+<link rel="stylesheet" href="/static/assets/plugins/summernote/summernote-bs4.min.css">
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="content-wrapper" style="background-color: #FFF8CD;">
+  <!--Start Page Header-->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0 text-dark">RecInScan Dashboard</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--End Page Header-->
+
+  <!--Start Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+
+        <!--Start Left Side-->
+        <section class="col-lg-6 connectedSortable">
+          <div class="card" style="background-color: #FF9642;">
+            <!--Start Header-->
+            <div class="card-header">
+              <h3 class="card-title">
+                Recipes
+              </h3>
+            </div>
+            <!--End Header-->
+
+            <!--Start Card Body-->
+            <div class="card-body">
+              <ul id="recipe-list" class="list-group">
+                <li class="list-group-item recipe-item" data-recipe="recipe1">Sisig Kapampangan Style With (Pork Belly)</li>
+                <li class="list-group-item recipe-item" data-recipe="recipe2">Sisig Kapampangan Style With (Pork Parts)</li>
+                <li class="list-group-item recipe-item" data-recipe="recipe3">Tocino Kapampanga Style-Kare</li>
+                <li class="list-group-item recipe-item" data-recipe="recipe4">Pork Menudo Kapampangan Style</li>
+                <li class="list-group-item recipe-item" data-recipe="recipe5">Beef Caldereta Kapampangan Style</li>
+              </ul>
+            </div>
+            <!--End Card Body-->
+          </div>
+        </section>
+        <!--End Left Side-->
+
+        <!--Start Right Side-->
+        <section class="col-lg-6 connectedSortable">
+          <div class="card" style="background-color: #FF9642;">
+            <!--Start Header-->
+            <div class="card-header">
+              <h3 class="card-title">
+                Ingredients and Procedure
+              </h3>
+            </div>
+            <!--End Header-->
+
+            <!--Start Card Body-->
+            <div class="card-body">
+              <div id="recipe-details" class="tab-content p-0">
+                <p>Select a recipe to view details</p>
+              </div>
+            </div>
+            <!--End Card Body-->
+          </div>
+        </section>
+        <!--End Right Side-->
+
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE -->
+{% block javascripts %}
+<!-- jQuery -->
+<script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  const recipes = {
+    recipe1: {
+      name: 'Sisig Kapampangan Style With (Pork Belly)',
+      ingredients: [
+        '1 pound pork belly - sliced about half-inch thick',
+        'salt and pepper',
+        '3 pieces chicken liver',
+        '1 big red onion - finely chopped',
+        '½ lemon or 3-4 kalamansi juice',
+        '1-2 chili peppers - minced or ¼ tablespoon chili flakes',
+        '½ tablespoon soy sauce',
+        '⅛ teaspoon ground black pepper'
+      ],
+      procedure:[
+        'Season pork belly slices with salt and pepper. Let it marinate for at least 30 minutes.',
+        'Grill pork belly and chicken liver until well done. Pork skin should be crispy.',
+        'Once grilled, chop the pork belly and chicken liver into small fine pieces.',
+        'In a bowl, combine the chopped meat, onions, lemon juice and chili pepper. Season with soy sauce and pepper.',
+        'Warm it in a pan with a bit of oil if desired. Alternatively, heat a sizzling plate and add some butter or margarine. Add the Sisig and serve while still sizzling hot.',
+      ],
+      image: '/static/assets/img/Recipes/recipe1.jpg'
+    },
+    recipe2: {
+      name: 'Sisig Kapampangan Style With (Pork Parts)',
+      ingredients: [
+        '750 g pork parts (ears, skin, maskara)',
+        '250 g chicken liver, grilled',
+        '2 pcs white onion, minced',
+        '10 pcs calamansi (Philippine lemon), juiced',
+        '1 pc green chili, thinly sliced',
+        '2 pcs red chili labuyo, thinly sliced',
+        'Salt and pepper to taste'
+      ],
+      procedure:[
+        'Finely chop the grilled pork parts and set aside.',
+        'Finely chop the grilled chicken liver. (You may also use a food processor.) In a large bowl, combine the finely chopped grilled pork parts and chicken liver.',
+        'Add the onions, chilli, and calamansi juice. Add more calamansi juice if you want it sourer.',
+        '(Note: Sisig should be sour. Others use vinegar as their souring agent, I prefer calamansi as it adds fragrance to the dish. Vinegar is too acidic, in my opinion.)',
+        'Season with salt and pepper to taste.',
+        'Serve on a plate. Garnish with a slice of calamansi and chilli.',
+        'If you wish to serve on a sizzling plate, you may also do so. Preheat the sizzling plate, add a bit of butter, then place the sisig on the hot plate. Garnish with a slice of calamansi and chilli.'
+      ],
+      image: '/static/assets/img/Recipes/recipe2.jpg'
+    },
+    recipe3: {
+      name: 'Tocino Kapampanga Style',
+      ingredients: [
+        '1kg pork butt, shoulder, ham or belly, cut into 1/4 inch thin slices',
+        '3/4 cup brown sugar',
+        '1/4 cup pineapple juice',
+        '3 cloves garlic, finely minced',
+        '2 tbsp rice vinegar',
+        '1 & 1/2 tbsp salt',
+        '1 tbsp light soy sauce',
+        '1/2 tbsp freshly ground black pepper',
+        'Natural red food colour (optional)'
+      ],
+      procedure:[
+        'In a large mixing bowl. Add all the ingredients for the tocino marinade except for the pork slices. Mix the ingredients together until will combined.',
+        'Add the pork slices into the marinade and mix by hand for up to an hour, or more if you have the patience to do so. Don’t forget to use gloves to avoid stained hands!',
+        'Once done with the mixing, transfer the pork to a container with a cover and let it sit overnight on the countertop.',
+        'Mix pork around for a couple of times more before placing it in the fridge to cure for 24 hours or up to 3 days. It can be frozen afterwards and stored for longer (up to 3 months).',
+        'Now that you’ve acquired the knack of making your own tocino (or no shame in just getting store-bought ones), it’s time to cook it!',
+        'Add about 2 cups of water (or just enough to cover the meat) and 1/4 cup of cooking oil into a large frying pan together with the pork tocino slices. Boil over high heat. The process of boiling further tenderises the meat while cooking.',
+        'When the water evaporates, the cooking oil will be left, instantly frying the meat. Turn the meat over after a few minutes of frying to cook evenly on all sides.',
+        'Serve hot with garlicky fried rice or steamed rice and fried egg – browned and crispy on the edges with a golden liquidy yolk is how I like my fried eggs. In addition, it tastes best when dipped in spicy vinegar!'
+      ],
+      image: '/static/assets/img/Recipes/recipe3.jpg'
+    },
+    recipe4: {
+      name: 'Pork Menudo Kapampangan Style',
+      ingredients: [
+        '1 lb pork belly (I rub rock salt in the meat then soak in vinegar and salt for minimum 30 minutes before I start prepping). Sliced meat in cubes',
+        '1 cup pork liver, washed and drained',
+        '3 pieces red hotdogs, sliced and simmered',
+        '1/4 cup raisins',
+        '1 cup diced potatoes',
+        '1 cup diced carrots',
+        '1/4 cup green peas',
+        '1 cup red and green capsicum',
+        '2 PCs bay leaf',
+        '1 tsp salt and cracked pepper to taste',
+        '2 tbsp fish sauce (optional for those who do not like fish sauce)',
+        '1 tbsp tomato paste',
+        '1/4 tsp oregano',
+        '1 tsp annatto powder',
+        '1/4 cup kalamansi juice or lemon juice',
+        '2 cups water or stock if desired'
+      ],
+      procedure:[
+        'Mix kalamansi or lemon juice with salt and pepper. Marinate the meat for at least 30 minutes (the longer the better), and ensure to keep it in the chiller while marinating.',
+        'Heat oil in a pot on low heat. Lightly fry the diced potatoes and carrots, then take them out of the pan and set them aside.',
+        'In the same pot with oil, sauté crushed garlic, onions, annatto powder, bay leaves, and oregano. Add the meat, leaving the marinade sauce on the side. Simmer until the meat is no longer pink. Add pork liver and sauté for about 10 minutes.',
+        'Add tomato paste and sauté well. It is important to sauté the paste properly with the meat, onions, and garlic. Then add fish sauce and water, letting it simmer until the meat is tender.',
+        'When the meat is tender, add the lightly browned potatoes, carrots, hot dogs, and green peas. Taste and adjust seasoning with salt and pepper as desired. Let it simmer for 3-5 minutes.',
+        'Finally, add the capsicum and raisins. Let it simmer for another 3-5 minutes. Serve warm with rice.'
+      ],
+      image: '/static/assets/img/Recipes/recipe4.jpg'
+    },
+    recipe5: {
+      name: 'Beef Caldereta Kapampangan Style',
+      ingredients: [
+      '1 kilo beef brisket, cut into squares',
+      '4 pcs 250ml Hunt’s tomato sauce',
+      '1-2 Pure Foods liver spread',
+      '2 large white onions, chopped',
+      '1 head garlic, chopped',
+      '2 carrots, sliced into bite-size pieces',
+      '2 potatoes, cut into squares',
+      '2 green bell peppers, cut into squares',
+      '1/2 cup Nestle all-purpose cream',
+      '1 cup grated cheese',
+      'Pepper',
+      '1 laurel leaf',
+      'Dried basil leaves (optional)',
+      'Salt',
+      '1-4 tbsp patis (fish sauce) – adjust to your preference',
+      '4 tbsp soy sauce',
+      '2 tbsp brown sugar (optional)',
+      '1-2 chili peppers (labuyo), minced'
+      ],
+      procedure:[
+      'Boil and simmer beef brisket, onions, laurel, basil, and pepper in at least 1/2 liter of water for 1 hour and 45 minutes or until tender. Remove the scum that floats on top. Turn off heat and take off laurel leaf.',
+      'On another pan, sauté garlic in very little oil until brownish. Drain from oil once garlic is brownish and set it aside.',
+      'Beef brisket should be cooked exactly 1 hour and 45 minutes. So you can start adding carrots and potatoes after 1 hour and 30 minutes.',
+      '*Leave at least 2 cups of beef broth in your pot and discard excess broth. (If you want a thick sauce for your caldereta, don’t leave too much broth.)',
+      'Add in tomato sauce, chili peppers, carrots, and potatoes.',
+      'Simmer for 5 minutes while stirring occasionally.',
+      'Add in garlic and liver spread and Nestle all-purpose cream, stirring constantly.',
+      'Adjust taste by adding soy sauce, sugar, fish sauce, and a pinch of salt.',
+      'Finally, add in bell pepper and 1 cup of grated cheese. Cover the pot and simmer for 1 or 2 minutes more. Turn off heat.',
+      'Ready to serve. Enjoy!'
+      ],
+      image: '/static/assets/img/Recipes/recipe5.jpg'
+    },
+
+  };
+
+  $('.recipe-item').on('click', function() {
+    const recipeKey = $(this).data('recipe');
+    const recipe = recipes[recipeKey];
+    
+    const recipeDetails = `
+      <h4>${recipe.name}</h4>
+      <img src="${recipe.image}" alt="${recipe.name}" style="width:100%; height: 250px; margin-bottom: 15px;">
+      <h5>Ingredients:</h5>
+      <ul>${recipe.ingredients.map(item => `<li>${item}</li>`).join('')}</ul>
+      <h5>Procedure:</h5>
+      <p>${recipe.procedure}</p>
+    `;
+    
+    $('#recipe-details').html(recipeDetails);
+  });
+</script>
+{% endblock javascripts %}

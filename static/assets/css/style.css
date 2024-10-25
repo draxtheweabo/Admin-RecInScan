@@ -1,0 +1,12 @@
+/* When the sidebar is collapsed */
+.sidebar-collapse .main-sidebar {
+width: 80px; /* Shrink the sidebar */
+}
+
+.sidebar-collapse .brand-text {
+display: none; /* Hide the text when collapsed */
+}
+
+.sidebar-collapse .brand-image {
+width: 40px; /* Keep the logo size visible */
+}
